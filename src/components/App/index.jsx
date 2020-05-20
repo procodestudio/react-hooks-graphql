@@ -5,13 +5,15 @@ class App extends Component {
     super();
 
     this.state = {
-      users: [
-        { id: 1, name: 'Paula' },
-        { id: 2, name: 'Joseph' },
-        { id: 3, name: 'Mike' },
-        { id: 4, name: 'Albert' },
-      ],
+      users: [],
     };
+  }
+
+  componentDidMount() {
+    const apiUrl = 'https://jsonplaceholder.typicode.com/users/';
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((users) => this.setState({ users }));
   }
 
   render() {
