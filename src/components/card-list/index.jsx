@@ -5,7 +5,7 @@ import './styles.css';
 
 const CardList = ({ users }) => (
   <div className="card-list">
-    { users && users.map((user) => <Card user={user} />)}
+    { users && users.map((user) => <Card key={user.id} user={user} />)}
   </div>
 );
 
