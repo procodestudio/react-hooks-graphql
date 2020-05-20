@@ -34,6 +34,7 @@ class App extends Component {
 
     return (
       <div className="App">
+        <h1 className="main-title">Simple filter app</h1>
         <SearchBox
           placeholder="filter users"
           handleChange={(evt) => this.filterUsers(evt)}
