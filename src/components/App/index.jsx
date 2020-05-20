@@ -9,7 +9,6 @@ class App extends Component {
 
     this.state = {
       users: [],
-      searchString: '',
       filteredUsers: [],
     };
   }
@@ -22,23 +21,20 @@ class App extends Component {
   }
 
   filterUsers(evt) {
-    this.setState({ searchString: evt.target.value }, () => {
-      const { users, searchString } = this.state;
-      const filteredUsers = users.filter((user) => (
-        user.name.toLowerCase().includes(searchString.toLowerCase())
-      ));
+    const { users } = this.state;
+    const filteredUsers = users.filter((user) => (
+      user.name.toLowerCase().includes(evt.target.value.toLowerCase())
+    ));
 
-      this.setState({ filteredUsers });
-    });
+    this.setState({ filteredUsers });
   }
 
   render() {
-    const { filteredUsers, searchString } = this.state;
+    const { filteredUsers } = this.state;
 
     return (
       <div className="App">
         <SearchBox
-          searchString={searchString}
           placeholder="filter users"
           handleChange={(evt) => this.filterUsers(evt)}
         />
