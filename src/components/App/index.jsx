@@ -8,6 +8,8 @@ class App extends Component {
 
     this.state = {
       users: [],
+      searchString: '',
+      filteredUsers: [],
     };
   }
 
@@ -15,15 +17,32 @@ class App extends Component {
     const apiUrl = 'https://jsonplaceholder.typicode.com/users/';
     fetch(apiUrl)
       .then((response) => response.json())
-      .then((users) => this.setState({ users }));
+      .then((users) => this.setState({ users, filteredUsers: users }));
+  }
+
+  filterUsers(evt) {
+    this.setState({ searchString: evt.target.value }, () => {
+      const { users, searchString } = this.state;
+      const filteredUsers = users.filter((user) => (
+        user.name.toLowerCase().includes(searchString.toLowerCase())
+      ));
+
+      this.setState({ filteredUsers });
+    });
   }
 
   render() {
-    const { users } = this.state;
+    const { filteredUsers, searchString } = this.state;
 
     return (
       <div className="App">
-        <CardList users={users} />
+        <input
+          type="search"
+          value={searchString}
+          placeholder="filter users"
+          onChange={(evt) => this.filterUsers(evt)}
+        />
+        <CardList users={filteredUsers} />
       </div>
     );
   }
