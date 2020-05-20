@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CardList from '../card-list';
 
 class App extends Component {
   constructor() {
@@ -21,7 +22,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        { users.map((user) => <h1 className="username" key={user.id}>{user.name}</h1>) }
+        <CardList>{ users.map((user) => <h1 className="username" key={user.id}>{user.name}</h1>) }</CardList>
       </div>
     );
   }
